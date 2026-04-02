@@ -2,466 +2,543 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>purr-fect valentine · moving no button (mobile+)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>i'm sorry · forgive me? 💔</title>
     <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            -webkit-tap-highlight-color: transparent; /* remove grey tap on mobile */
-            cursor: default;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
             user-select: none;
         }
 
         body {
             min-height: 100vh;
-            background: linear-gradient(145deg, #ffe4ec 0%, #ffd9e8 100%);
-            font-family: 'Segoe UI', 'Quicksand', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #fbe9f0 0%, #f8dbe8 100%);
+            font-family: 'Segoe UI', 'Quicksand', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 20px;
             position: relative;
             overflow-x: hidden;
-            margin: 0;
-            padding: 12px;
-            touch-action: pan-y pinch-zoom; /* allow gentle page scroll if needed, but buttons will manage */
+            touch-action: pan-y pinch-zoom;
         }
 
-        /* doodle background – floating cats, lilies, balloons */
-        .doodle-world {
+        /* background doodles: cats, lilies, balloons, broken hearts */
+        .bg-doodles {
             position: fixed;
             inset: 0;
-            pointer-events: none;  /* so buttons are still clickable through doodles */
+            pointer-events: none;
             z-index: 1;
         }
 
         .doodle {
             position: absolute;
-            font-size: clamp(2rem, 10vw, 4.5rem);
-            filter: drop-shadow(2px 4px 6px rgba(245, 155, 185, 0.3));
-            animation: floatSoft 8s infinite ease-in-out;
-            opacity: 0.7;
-            user-select: none;
-            pointer-events: none;
+            font-size: clamp(2rem, 9vw, 4rem);
+            opacity: 0.5;
+            animation: gentleFloat 12s infinite ease-in-out;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.02));
         }
 
-        /* random positions & delays – more doodles for rich background */
-        .doodle:nth-child(1) { top: 5%; left: 2%; animation-delay: 0s; }
-        .doodle:nth-child(2) { bottom: 10%; right: 1%; animation-delay: 1.2s; font-size: 5rem; }
-        .doodle:nth-child(3) { top: 18%; right: 8%; animation-delay: 2.4s; }
-        .doodle:nth-child(4) { bottom: 22%; left: 7%; animation-delay: 0.9s; font-size: 5rem; }
-        .doodle:nth-child(5) { top: 70%; left: 15%; animation-delay: 1.8s; }
-        .doodle:nth-child(6) { top: 12%; right: 20%; animation-delay: 0.3s; }
-        .doodle:nth-child(7) { bottom: 35%; right: 15%; animation-delay: 2.1s; }
-        .doodle:nth-child(8) { top: 50%; left: 3%; animation-delay: 1.5s; }
-        .doodle:nth-child(9) { bottom: 5%; left: 30%; animation-delay: 0.6s; }
-        .doodle:nth-child(10) { top: 80%; right: 5%; animation-delay: 2.7s; }
-        .doodle:nth-child(11) { top: 30%; left: 35%; animation-delay: 1.1s; }
-        .doodle:nth-child(12) { bottom: 15%; left: 50%; animation-delay: 0.4s; }
-        .doodle:nth-child(13) { top: 10%; left: 65%; animation-delay: 1.9s; }
-        .doodle:nth-child(14) { top: 40%; right: 30%; animation-delay: 2.2s; }
-        .doodle:nth-child(15) { bottom: 30%; left: 75%; animation-delay: 0.7s; }
-
-        @keyframes floatSoft {
+        @keyframes gentleFloat {
             0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-16px) rotate(3deg); }
+            50% { transform: translateY(-12px) rotate(2deg); }
             100% { transform: translateY(0px) rotate(0deg); }
         }
 
-        /* main valentine card – fully responsive */
-        .valentine-card {
-            background: rgba(255, 245, 250, 0.75);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 48px 48px 60px 60px;
-            border: 3px solid rgba(255, 200, 220, 0.9);
-            box-shadow: 0 25px 40px -12px #fbaacb, 0 8px 18px -5px #fbb0cb;
-            padding: 2rem 1.5rem 2.2rem;
-            text-align: center;
-            max-width: 560px;
+        .doodle:nth-child(1) { top: 8%; left: 3%; animation-delay: 0s; }
+        .doodle:nth-child(2) { bottom: 12%; right: 5%; animation-delay: 1.2s; font-size: 4rem; }
+        .doodle:nth-child(3) { top: 22%; right: 10%; animation-delay: 2.4s; }
+        .doodle:nth-child(4) { bottom: 30%; left: 6%; animation-delay: 0.7s; }
+        .doodle:nth-child(5) { top: 65%; left: 15%; animation-delay: 1.5s; }
+        .doodle:nth-child(6) { top: 12%; right: 22%; animation-delay: 0.3s; }
+        .doodle:nth-child(7) { bottom: 45%; right: 18%; animation-delay: 2.1s; }
+        .doodle:nth-child(8) { top: 80%; left: 8%; animation-delay: 1.8s; }
+        .doodle:nth-child(9) { bottom: 8%; left: 28%; animation-delay: 0.9s; }
+        .doodle:nth-child(10) { top: 40%; left: 85%; animation-delay: 1.1s; }
+        .doodle:nth-child(11) { top: 55%; left: 45%; animation-delay: 2.6s; }
+        .doodle:nth-child(12) { bottom: 20%; left: 70%; animation-delay: 0.4s; }
+
+        /* main apology card */
+        .apology-card {
+            background: rgba(255, 248, 250, 0.85);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-radius: 64px;
+            border: 2px solid rgba(255, 180, 200, 0.7);
+            box-shadow: 0 30px 45px -15px rgba(190, 70, 100, 0.25), 0 10px 20px -5px rgba(0,0,0,0.05);
+            padding: 2.2rem 1.8rem 2.5rem;
+            max-width: 600px;
             width: 100%;
-            position: relative;
+            text-align: center;
             z-index: 20;
-            transition: box-shadow 0.2s;
+            transition: all 0.2s ease;
+        }
+
+        .icon-row {
+            font-size: 3rem;
+            margin-bottom: 12px;
+            letter-spacing: 8px;
         }
 
         h1 {
-            font-size: clamp(2.5rem, 10vw, 4rem);
+            font-size: clamp(2.4rem, 9vw, 3.6rem);
             font-weight: 700;
-            color: #bd2b5b;
-            text-shadow: 3px 3px 0 #ffcddc;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
+            color: #aa3f5e;
+            text-shadow: 2px 2px 0 #ffe0e9;
+            margin-bottom: 12px;
             font-family: 'Trebuchet MS', 'Quicksand', cursive;
-            word-break: break-word;
-            line-height: 1.2;
+            transition: all 0.2s;
         }
 
-        .sub {
-            font-size: clamp(1.3rem, 5vw, 1.9rem);
-            color: #d45c7a;
-            background: #fff0f5cc;
-            display: inline-block;
-            padding: 8px 20px;
-            border-radius: 60px;
-            margin-bottom: 24px;
-            backdrop-filter: blur(2px);
-            border: 2px dashed #ffb3c6;
+        .apology-message {
+            background: #fff5f9e6;
+            border-radius: 48px;
+            padding: 18px 20px;
+            margin: 18px 0 20px;
+            border: 2px dashed #ffb7cb;
+            font-size: 1.25rem;
+            line-height: 1.45;
+            color: #7c3f55;
             font-weight: 500;
+            transition: all 0.3s ease;
         }
 
-        /* button container with relative positioning for moving button */
+        .apology-message p {
+            margin: 8px 0;
+        }
+
+        .cute-paws {
+            font-size: 1.9rem;
+            margin: 5px 0;
+        }
+
+        .pleading-extra {
+            font-size: 1rem;
+            background: #ffeef4;
+            border-radius: 40px;
+            padding: 8px;
+            margin-top: 8px;
+            display: inline-block;
+        }
+
         .button-area {
             position: relative;
-            min-height: 200px;        /* gives room for movement on all screens */
+            min-height: 210px;
             display: flex;
-            flex-wrap: wrap;
             align-items: center;
             justify-content: center;
             margin: 15px 0 10px;
-            touch-action: pan-y;       /* allow slight scroll if finger moves outside */
+            touch-action: pan-y;
         }
 
-        /* base button style – fat and friendly */
-        .valentine-btn {
-            font-size: clamp(1.8rem, 7vw, 2.5rem);
+        .forgive-btn {
+            font-size: clamp(1.7rem, 6.5vw, 2.3rem);
             font-weight: 700;
-            padding: 14px 28px;
+            padding: 14px 32px;
             border: none;
-            border-radius: 60px;
-            box-shadow: 0 7px 0 #b34e71, 0 14px 22px -8px #e47b9f;
+            border-radius: 80px;
+            background: #ffb7cb;
+            color: #601f3a;
+            box-shadow: 0 8px 0 #aa4162;
             transition: all 0.1s ease;
-            letter-spacing: 1px;
-            background: #ffb3cf;
-            color: #641e3a;
-            border: 3px solid #ffe2ed;
             cursor: pointer;
-            display: inline-block;
-            min-width: 150px;
-            transform: translateY(0);
+            min-width: 160px;
+            letter-spacing: 1px;
+            border: 2px solid #ffeef4;
             z-index: 30;
-            -webkit-touch-callout: none;
             -webkit-appearance: none;
         }
 
-        .valentine-btn:active {
-            transform: translateY(5px);
-            box-shadow: 0 2px 0 #b34e71, 0 8px 12px -4px #e07b9f;
+        .forgive-btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 3px 0 #aa4162;
         }
 
-        /* yes button – stays in flow, but we'll use it as anchor */
-        #yesBtn {
-            background: #ff98bb;
-            box-shadow: 0 7px 0 #aa3f63, 0 14px 22px -8px #cf6085;
-            flex-shrink: 0;
+        #forgiveBtn {
+            background: #ff9bbd;
+            box-shadow: 0 8px 0 #a13b5a;
         }
 
-        /* no button – absolute so it can move */
-        .moving-btn {
+        /* moving "not yet" button with extra personality */
+        .moving-apology {
             position: absolute;
-            /* initial will be set via JS */
-            transition: left 0.15s ease-out, top 0.15s ease-out;
+            transition: left 0.16s cubic-bezier(0.2, 0.9, 0.4, 1.1), top 0.16s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             will-change: left, top;
-            margin: 0;
             z-index: 45;
-            touch-action: none;        /* prevent browser from panning when touching button */
+            touch-action: none;
+            background: #e2a1b9;
+            box-shadow: 0 8px 0 #88415b;
+            color: #2f1420;
         }
 
-        /* extra doodle inside card */
-        .inline-doodle {
-            font-size: 2.2rem;
-            margin: 0 6px;
-            filter: drop-shadow(0 4px 4px #fcaac0);
+        .floating-heart {
             display: inline-block;
+            animation: heartbeat 1.5s infinite;
         }
 
-        .heart-sticker {
-            font-size: 2.8rem;
-            line-height: 1;
-            margin-bottom: 6px;
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
 
         footer {
-            margin-top: 25px;
-            color: #c96283;
-            font-size: clamp(1rem, 4vw, 1.3rem);
-            background: #ffeef4d0;
+            margin-top: 30px;
+            font-size: 0.95rem;
+            color: #bd6f8a;
+            background: #fff0f6cc;
             border-radius: 40px;
-            padding: 10px 18px;
-            border: 2px dotted #ffa5c0;
-            backdrop-filter: blur(2px);
+            padding: 10px 16px;
+            backdrop-filter: blur(4px);
+            border: 1px solid #ffc0d0;
         }
 
-        /* small screen fine-tuning */
-        @media (max-width: 450px) {
-            .valentine-card {
-                padding: 1.5rem 1rem 1.8rem;
-                border-radius: 40px;
-            }
-            .button-area {
-                min-height: 230px;    /* more room because buttons are larger relative */
-            }
-            .valentine-btn {
-                min-width: 130px;
-                padding: 12px 16px;
-            }
-        }
-
-        /* for very short screens (landscape) */
-        @media (max-height: 600px) {
-            .valentine-card {
-                padding: 1rem 1rem 1.3rem;
-            }
-            .button-area {
-                min-height: 160px;
-            }
-            h1 { margin-bottom: 0px; }
+        @media (max-width: 500px) {
+            .apology-card { padding: 1.8rem 1.2rem 2rem; }
+            .button-area { min-height: 230px; }
+            .forgive-btn { min-width: 135px; padding: 12px 18px; }
+            .apology-message { font-size: 1rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- background doodle layer (more cats, lilies, balloons) -->
-    <div class="doodle-world">
-        <!-- cats -->
+    <div class="bg-doodles">
         <div class="doodle">🐱</div>
-        <div class="doodle">😺</div>
-        <div class="doodle">🐈⬛</div>
-        <div class="doodle">😸</div>
-        <div class="doodle">🐈</div>
-        <div class="doodle">😻</div>
-        <!-- lily flowers (variety) -->
+        <div class="doodle">💔</div>
         <div class="doodle">⚜️</div>
         <div class="doodle">🌸</div>
-        <div class="doodle">🏵️</div>
+        <div class="doodle">🐈⬛</div>
+        <div class="doodle">🎈</div>
         <div class="doodle">🌷</div>
-        <div class="doodle">🌺</div>
-        <!-- balloons -->
-        <div class="doodle">🎈</div>
-        <div class="doodle">🎈</div>
-        <div class="doodle">🎈</div>
-        <div class="doodle">🎈</div>
-        <!-- extra cat print -->
+        <div class="doodle">🕊️</div>
+        <div class="doodle">💌</div>
         <div class="doodle">🐾</div>
+        <div class="doodle">🌙</div>
+        <div class="doodle">💗</div>
     </div>
 
-    <!-- main valentine card -->
-    <div class="valentine-card">
-        <div class="heart-sticker">
-            <span class="inline-doodle">🐱</span> 💗 <span class="inline-doodle">⚜️</span> 💗 <span class="inline-doodle">🎈</span>
+    <div class="apology-card">
+        <div class="icon-row">
+            <span>💔</span> <span class="floating-heart">💗</span> <span>🐱</span>
         </div>
-        <h1>will you be<br>my valentine?</h1>
-        <div class="sub">
-            <span>😻</span> meow! <span>🌷</span>
+        <h1 id="mainTitle">i'm truly sorry...</h1>
+        <div class="apology-message" id="apologyMsgBox">
+            <p>🌸 i messed up, and my heart feels heavy. 🌸</p>
+            <p>you mean the world to me, and i deeply regret hurting you.</p>
+            <div class="cute-paws">🐾 💕 🐾</div>
+            <p>will you find it in your heart to forgive me?</p>
         </div>
 
-        <!-- button area with moving no button (optimized for touch) -->
         <div class="button-area" id="buttonArea">
-            <!-- YES button (normal flow) -->
-            <button class="valentine-btn" id="yesBtn" onclick="showValentineYes()">💖 yes!</button>
-
-            <!-- NO button (absolute positioned, moves on touch/hover) -->
-            <button class="valentine-btn moving-btn" id="noBtn" ontouchstart="moveNoButton(); event.preventDefault();" onclick="preventClick(event)">💔 no</button>
+            <button class="forgive-btn" id="forgiveBtn" onclick="showForgiveness()">💝 forgive me</button>
+            <button class="forgive-btn moving-apology" id="notYetBtn">🥺 not yet</button>
         </div>
 
-        <footer>
-            <span>💕</span>  the "no" button runs away  <span>💕</span>
-            <div style="font-size: 0.95rem; margin-top: 5px;">(tap yes for a sweet surprise ✨)</div>
+        <footer id="footerNote">
+            <span>✨</span> the "not yet" button runs away... but every click brings me closer to your heart <span>✨</span>
         </footer>
     </div>
 
     <script>
         (function() {
-            // ---- moving "no" button logic (mobile + desktop) ----
-            const noButton = document.getElementById('noBtn');
+            // ---------- APOLOGY WEBSITE WITH PROGRESSIVE "NOT YET" PLEAS ----------
+            const notYetBtn = document.getElementById('notYetBtn');
             const buttonArea = document.getElementById('buttonArea');
-            const yesBtn = document.getElementById('yesBtn');
+            const forgiveBtn = document.getElementById('forgiveBtn');
+            const apologyMsgBox = document.getElementById('apologyMsgBox');
+            const mainTitle = document.getElementById('mainTitle');
+            const footerNote = document.getElementById('footerNote');
 
-            // ensure no button starts at a safe position (right side, not overlapping yes)
-            function setSmartInitialPosition() {
-                // wait for layout
-                setTimeout(() => {
-                    const areaRect = buttonArea.getBoundingClientRect();
-                    const btnRect = noButton.getBoundingClientRect();
-                    const yesRect = yesBtn.getBoundingClientRect();
+            // State for "not yet" clicks: changes message, plea intensity
+            let notYetClickCount = 0;
+            const MAX_PLEA_STAGES = 5;  // after 5 clicks, button becomes extra desperate and finally easier? but still moves
 
-                    const btnWidth = btnRect.width;
-                    const btnHeight = btnRect.height;
+            // different plead messages & title changes when clicking "not yet"
+            const pleaMessages = [
+                { 
+                    title: "really? 💔", 
+                    msg: "really? 💔 my heart is aching... please don't say not yet...", 
+                    extra: "i'll do anything to make it right."
+                },
+                { 
+                    title: "i messed up... 💧", 
+                    msg: "i know i messed up... big time. you have every right to be upset.", 
+                    extra: "but i'm begging you, give me a chance to fix this."
+                },
+                { 
+                    title: "pretty please? 🥺", 
+                    msg: "pretty please? with a cherry on top? i'll bring you lilies and cat cuddles forever.", 
+                    extra: "💗 i'm on my knees (virtually) 💗"
+                },
+                { 
+                    title: "i'm a disaster without you", 
+                    msg: "i'm a complete disaster without you. every second feels empty.", 
+                    extra: "🌧️ please, i need your forgiveness like air 🌧️"
+                },
+                { 
+                    title: "last chance? 🥺👉👈", 
+                    msg: "okay this is my final plea... i'll serenade you with cute cat videos and bake you cookies. forgive me?", 
+                    extra: "💘 i promise to be better. forever. 💘"
+                }
+            ];
 
-                    // calculate ideal right side placement, avoid covering yesBtn
-                    // we want it to be to the right of yesBtn, if space, else below/above.
-                    const yesRight = yesRect.right - areaRect.left;
-                    const availableWidth = areaRect.width;
-
-                    let leftPos, topPos;
-
-                    if (yesRight + btnWidth + 20 < availableWidth) {
-                        // place to the right of yes button
-                        leftPos = yesRight + 20;
-                    } else {
-                        // place on the far right but with margin
-                        leftPos = Math.min(availableWidth - btnWidth - 12, availableWidth * 0.65);
-                    }
-
-                    // vertical: roughly centered, but not overlapping yes
-                    const yesTopRelative = yesRect.top - areaRect.top;
-                    const yesBottomRelative = yesRect.bottom - areaRect.top;
-
-                    // try to put no at vertical center if possible, else above or below
-                    const areaCenter = areaRect.height / 2;
-                    topPos = areaCenter - btnHeight / 2;
-
-                    // but ensure it doesn't overlap yes button too much (vertical)
-                    const noMiddle = topPos + btnHeight/2;
-                    const yesMiddle = yesTopRelative + (yesRect.height)/2;
-
-                    if (Math.abs(noMiddle - yesMiddle) < 50 && Math.abs(leftPos - (yesRect.left - areaRect.left)) < 150) {
-                        // too close, shift down or up
-                        topPos = yesBottomRelative + 15;
-                        if (topPos + btnHeight > areaRect.height - 10) {
-                            topPos = yesTopRelative - btnHeight - 15;
-                        }
-                    }
-
-                    // clamp to boundaries
-                    leftPos = Math.max(8, Math.min(leftPos, areaRect.width - btnWidth - 8));
-                    topPos = Math.max(8, Math.min(topPos, areaRect.height - btnHeight - 8));
-
-                    noButton.style.left = leftPos + 'px';
-                    noButton.style.top = topPos + 'px';
-                }, 30);
-            }
-
-            // get random safe position (within button area)
-            function getRandomPosition() {
+            // Helper: random position inside buttonArea
+            function getRandomPositionWithinArea() {
+                if (!buttonArea || !notYetBtn) return { left: 20, top: 20 };
                 const areaRect = buttonArea.getBoundingClientRect();
-                const btnRect = noButton.getBoundingClientRect();
-
+                const btnRect = notYetBtn.getBoundingClientRect();
                 const btnWidth = btnRect.width;
                 const btnHeight = btnRect.height;
                 const padding = 12;
 
                 let maxLeft = areaRect.width - btnWidth - padding;
                 let maxTop = areaRect.height - btnHeight - padding;
-
-                // ensure positive
                 maxLeft = Math.max(padding, maxLeft);
                 maxTop = Math.max(padding, maxTop);
+                if (maxLeft <= padding) maxLeft = padding + 10;
+                if (maxTop <= padding) maxTop = padding + 10;
 
                 const left = padding + Math.random() * (maxLeft - padding);
                 const top = padding + Math.random() * (maxTop - padding);
-
                 return { left, top };
             }
 
-            // move button (called on hover / touch)
-            function moveNoButton() {
-                // prevent default during touch
-                if (event && event.cancelable) event.preventDefault();
+            // Move the "not yet" button
+            function moveNotYetButton() {
+                if (!notYetBtn || !buttonArea) return;
+                if (window.event && window.event.cancelable) window.event.preventDefault();
 
                 const areaRect = buttonArea.getBoundingClientRect();
-                const btnRect = noButton.getBoundingClientRect();
-
-                // current relative position
-                const currentLeft = btnRect.left - areaRect.left;
-                const currentTop = btnRect.top - areaRect.top;
+                const btnRect = notYetBtn.getBoundingClientRect();
+                const currentLeftRel = btnRect.left - areaRect.left;
+                const currentTopRel = btnRect.top - areaRect.top;
 
                 let newLeft, newTop;
                 let attempts = 0;
-                const maxAttempts = 20;
-
-                // try to find a position not too close to current (makes it feel like it's running)
+                const maxAttempts = 18;
                 do {
-                    const pos = getRandomPosition();
+                    const pos = getRandomPositionWithinArea();
                     newLeft = pos.left;
                     newTop = pos.top;
                     attempts++;
                     if (attempts > maxAttempts) break;
-                } while (Math.hypot(newLeft - currentLeft, newTop - currentTop) < 60 && attempts < 15);
+                } while (Math.hypot(newLeft - currentLeftRel, newTop - currentTopRel) < 55 && attempts < 12);
 
-                // apply new position
-                noButton.style.left = newLeft + 'px';
-                noButton.style.top = newTop + 'px';
-
-                // small haptic feedback (optional, just for modern mobile)
-                if (navigator.vibrate) navigator.vibrate(10);
+                notYetBtn.style.left = newLeft + 'px';
+                notYetBtn.style.top = newTop + 'px';
+                if (navigator.vibrate) navigator.vibrate(8);
             }
 
-            // prevent clicking no button and move aggressively
-            function preventClick(event) {
-                event.preventDefault();
-                event.stopPropagation();
+            // Update the apology content based on click count (escalating cuteness/desperation)
+            function updateApologyOnNotYet() {
+                // clamp the stage
+                let stage = Math.min(notYetClickCount, MAX_PLEA_STAGES - 1);
+                if (notYetClickCount >= MAX_PLEA_STAGES) stage = MAX_PLEA_STAGES - 1;
+                
+                const plea = pleaMessages[stage];
+                if (plea) {
+                    mainTitle.innerHTML = plea.title;
+                    apologyMsgBox.innerHTML = `
+                        <p>💔 ${plea.msg} 💔</p>
+                        <div class="cute-paws">🐱💦🥺</div>
+                        <p class="pleading-extra">✨ ${plea.extra} ✨</p>
+                        <p style="font-size:0.9rem; margin-top:8px;">(click 'forgive me' to heal my heart)</p>
+                    `;
+                }
+                // if clicks exceed max stages, keep last plea but add extra desperate flair
+                if (notYetClickCount >= MAX_PLEA_STAGES) {
+                    const extraDesperate = document.createElement('div');
+                    if (!apologyMsgBox.querySelector('.super-desperate')) {
+                        const despairSpan = document.createElement('p');
+                        despairSpan.className = 'super-desperate';
+                        despairSpan.style.fontSize = '1.1rem';
+                        despairSpan.style.fontWeight = 'bold';
+                        despairSpan.style.background = '#ffd9e6';
+                        despairSpan.style.borderRadius = '30px';
+                        despairSpan.style.padding = '6px';
+                        despairSpan.style.marginTop = '10px';
+                        despairSpan.innerHTML = '💗 i am literally begging you with every pixel 💗';
+                        apologyMsgBox.appendChild(despairSpan);
+                    }
+                }
 
-                // move button even more (twice for drama)
-                moveNoButton();
-                setTimeout(() => moveNoButton(), 20);
+                // also change footer to reflect desperation
+                if (notYetClickCount === 1) {
+                    footerNote.innerHTML = `<span>🥺</span> she clicked "not yet" ... but my love persists <span>🥺</span>`;
+                } else if (notYetClickCount === 2) {
+                    footerNote.innerHTML = `<span>😭</span> i messed up... but i'm learning, pretty please? <span>💧</span>`;
+                } else if (notYetClickCount >= 3) {
+                    footerNote.innerHTML = `<span>💗🫂</span> each 'not yet' breaks me, but i'll never stop trying. forgive me? <span>🫂💗</span>`;
+                }
+            }
 
-                // show playful alert (mobile friendly)
-                alert("💘 uh-uh! the 'no' button is shy… it ran away! 💘");
+            // Handle "not yet" click: move button, update plea message, increase counter
+            function handleNotYetClick(event) {
+                if (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                // increase counter
+                notYetClickCount++;
+                
+                // Update the apology message to show "really? / i messed up / pretty please" etc.
+                updateApologyOnNotYet();
+                
+                // Move button aggressively (twice for dramatic effect)
+                moveNotYetButton();
+                setTimeout(() => moveNotYetButton(), 40);
+                
+                // Also make a small playful alert (soft and remorseful, not annoying)
+                if (notYetClickCount === 1) {
+                    alert("💔 'really?' ... i understand. but my apology is real, give me a chance?");
+                } else if (notYetClickCount === 2) {
+                    alert("😞 i messed up, i know. pretty please? i'm trying so hard.");
+                } else if (notYetClickCount === 3) {
+                    alert("🥺 i'm on my knees here... i'll make it up to you a thousand times.");
+                } else if (notYetClickCount >= 4) {
+                    alert("💘 okay i'm desperate now. just one click on 'forgive me' and i'm yours forever. 💘");
+                }
+                
                 return false;
             }
 
-            // yes button click – sweet message
-            function showValentineYes() {
-                alert("💗 yay!!! meow means yes! happy valentine's day! 💗 🐱 ⚜️ 🎈");
-                // optional little visual change
-                document.querySelector('h1').innerHTML = '💞 yay! 💞';
-                document.querySelector('.sub').innerHTML = '🐱💗⚜️ i knew it! 💗🎈🐱';
+            // FORGIVENESS MAGIC ✨ (same as before but extra love)
+            function showForgiveness() {
+                // Disable moving button completely
+                if (notYetBtn) {
+                    notYetBtn.style.display = 'none';
+                }
+                // Transform card into forgiven state
+                mainTitle.innerHTML = "💞 forgiven & cherished 💞";
+                apologyMsgBox.innerHTML = `
+                    <p>✨ thank you for your beautiful heart ✨</p>
+                    <p>i promise to do better, every single day. you made my world bright again.</p>
+                    <div class="cute-paws">🐱💗⚜️🎈🌸</div>
+                    <p>sending you a thousand hugs, lily flowers, and endless love.</p>
+                    <p style="margin-top: 10px;">🎀 i'm the luckiest person alive 🎀</p>
+                `;
+                const iconRow = document.querySelector('.icon-row');
+                if (iconRow) iconRow.innerHTML = `<span>💗</span> <span>🐈⬛</span> <span>🌷</span> <span>🎈</span> <span>💗</span>`;
+                
+                if (buttonArea) buttonArea.style.minHeight = 'auto';
+                if (footerNote) {
+                    footerNote.innerHTML = "<span>🌸💕 you forgave me. my heart is full. i'll love you better every day. 💕🌸</span><br><span style='font-size:0.85rem'>🐱 a new beginning 🐱</span>";
+                }
+                
+                // Celebration hearts
+                for(let i=0;i<18;i++) createFloatingHeart();
+                
+                // Sweet alert
+                alert("💗💗 THANK YOU! i'll treasure your forgiveness forever. 💗💗");
             }
-
-            // attach event listeners (mobile + desktop)
-            noButton.addEventListener('touchstart', function(e) {
-                e.preventDefault();      // prevent scrolling
-                moveNoButton();
-            }, { passive: false });
-
-            noButton.addEventListener('mouseenter', moveNoButton);
-            noButton.addEventListener('click', preventClick);
-
-            // also move on touchmove (to catch finger sliding onto button)
-            noButton.addEventListener('touchmove', function(e) {
-                e.preventDefault();
-                moveNoButton();
-            }, { passive: false });
-
-            // reposition on resize and orientation change
-            window.addEventListener('resize', function() {
-                // keep no button inside visible area
+            
+            function createFloatingHeart() {
+                const heart = document.createElement('div');
+                heart.innerHTML = '💖';
+                heart.style.position = 'fixed';
+                heart.style.fontSize = (Math.random() * 30 + 18) + 'px';
+                heart.style.left = Math.random() * window.innerWidth + 'px';
+                heart.style.bottom = '-20px';
+                heart.style.pointerEvents = 'none';
+                heart.style.zIndex = '9999';
+                heart.style.opacity = '0.9';
+                heart.style.transition = 'all 1.8s ease-out';
+                document.body.appendChild(heart);
+                setTimeout(() => {
+                    heart.style.transform = `translateY(-${window.innerHeight + 100}px) rotate(10deg)`;
+                    heart.style.opacity = '0';
+                }, 20);
+                setTimeout(() => heart.remove(), 2000);
+            }
+            
+            // Initialize button position (smart, to the right of forgive button)
+            function setInitialNotYetPosition() {
+                setTimeout(() => {
+                    if (!buttonArea || !notYetBtn || !forgiveBtn) return;
+                    const areaRect = buttonArea.getBoundingClientRect();
+                    const forgiveRect = forgiveBtn.getBoundingClientRect();
+                    const btnRect = notYetBtn.getBoundingClientRect();
+                    const forgiveRightRel = forgiveRect.right - areaRect.left;
+                    const btnWidth = btnRect.width;
+                    const areaWidth = areaRect.width;
+                    let leftPos = 0;
+                    let topPos = 0;
+                    
+                    if (forgiveRightRel + btnWidth + 25 < areaWidth) {
+                        leftPos = forgiveRightRel + 18;
+                    } else {
+                        leftPos = Math.min(areaWidth - btnWidth - 12, areaWidth * 0.65);
+                    }
+                    
+                    const forgiveTopRel = forgiveRect.top - areaRect.top;
+                    const forgiveBottomRel = forgiveRect.bottom - areaRect.top;
+                    const areaCenter = areaRect.height / 2;
+                    topPos = areaCenter - btnRect.height / 2;
+                    
+                    const btnCenter = topPos + btnRect.height/2;
+                    const forgiveCenter = forgiveTopRel + forgiveRect.height/2;
+                    if (Math.abs(btnCenter - forgiveCenter) < 55) {
+                        topPos = forgiveBottomRel + 12;
+                        if (topPos + btnRect.height > areaRect.height - 12) {
+                            topPos = forgiveTopRel - btnRect.height - 12;
+                        }
+                    }
+                    
+                    leftPos = Math.max(12, Math.min(leftPos, areaRect.width - btnRect.width - 12));
+                    topPos = Math.max(12, Math.min(topPos, areaRect.height - btnRect.height - 12));
+                    notYetBtn.style.left = leftPos + 'px';
+                    notYetBtn.style.top = topPos + 'px';
+                }, 50);
+            }
+            
+            function repositionOnResize() {
+                if (!notYetBtn || notYetBtn.style.display === 'none') return;
                 const areaRect = buttonArea.getBoundingClientRect();
-                const btnRect = noButton.getBoundingClientRect();
-
-                let left = parseFloat(noButton.style.left) || 0;
-                let top = parseFloat(noButton.style.top) || 0;
-
+                const btnRect = notYetBtn.getBoundingClientRect();
+                let left = parseFloat(notYetBtn.style.left) || 0;
+                let top = parseFloat(notYetBtn.style.top) || 0;
                 const maxLeft = areaRect.width - btnRect.width - 12;
                 const maxTop = areaRect.height - btnRect.height - 12;
-
                 left = Math.max(12, Math.min(left, maxLeft));
                 top = Math.max(12, Math.min(top, maxTop));
-
-                noButton.style.left = left + 'px';
-                noButton.style.top = top + 'px';
+                notYetBtn.style.left = left + 'px';
+                notYetBtn.style.top = top + 'px';
+            }
+            
+            // attach events: touch + mouse
+            function attachEvents() {
+                if (!notYetBtn) return;
+                notYetBtn.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    handleNotYetClick(e);
+                }, { passive: false });
+                notYetBtn.addEventListener('touchmove', function(e) {
+                    e.preventDefault();
+                    moveNotYetButton();
+                }, { passive: false });
+                notYetBtn.addEventListener('mouseenter', moveNotYetButton);
+                notYetBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    handleNotYetClick(e);
+                });
+            }
+            
+            // Expose global functions
+            window.showForgiveness = showForgiveness;
+            window.handleNotYetClick = handleNotYetClick;
+            
+            window.addEventListener('load', () => {
+                setInitialNotYetPosition();
+                attachEvents();
             });
-
-            // initialize after everything loaded
-            window.addEventListener('load', function() {
-                setSmartInitialPosition();
+            window.addEventListener('resize', () => {
+                setTimeout(repositionOnResize, 60);
             });
-
-            // also set initial after short delay (for slower devices)
-            setTimeout(setSmartInitialPosition, 100);
-
-            // extra: force reposition if user tries to tap on button area background (no effect)
-            // but we are fine
-
-            // expose functions globally for onclick attributes
-            window.showValentineYes = showValentineYes;
-            window.preventClick = preventClick;
-            window.moveNoButton = moveNoButton;   // used in ontouchstart inline
+            setTimeout(setInitialNotYetPosition, 120);
         })();
     </script>
-
-    <!-- add second inline handler for safety (already attached via listeners) -->
 </body>
 </html>
